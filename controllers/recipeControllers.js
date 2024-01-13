@@ -140,12 +140,44 @@ const deleteRecipe = asyncHandler(async(req,res) => {
    res.status(201).send("Recipe deleted!")
 })
 
+//desc: Retrieve user's recipes
+//route: GET api/recipe/my_recipes
+//access: private
+const myRecipes = asyncHandler(async(req,res) => {
+
+    const loggedInUserId = req.user._id; 
+
+     const user = await User.findById(loggedInUserId).populate({
+         path: 'recipes',
+         model: 'Recipe', 
+     });
+ 
+     if (!user) {
+         res.status(404).json({ message: 'User not found' });
+         return;
+     }
+ 
+     // Access the user's recipes with full details
+     const userRecipes = user.recipes;
+ 
+     const userRecipesArray = userRecipes.map(recipe => ({
+         _id: recipe._id,
+         name: recipe.name,
+         ingredients: recipe.ingredients,
+         instructions: recipe.instructions,
+     }));
+ 
+     res.json(userRecipesArray);
+})
+
 export { 
     fetchAllRecipe,
     uploadRecipe,
     updateRecipe,
     findRecipe,
-    deleteRecipe
+    deleteRecipe,
+    myRecipes
     
  }
+
 
