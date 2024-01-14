@@ -10,8 +10,15 @@ import User from "./models/userModel.js";
 import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT
+import cors from 'cors';
 
 connectDB()
+
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
+    headers: ['Content-Type']
+  }))
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
