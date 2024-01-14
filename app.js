@@ -10,7 +10,6 @@ import User from "./models/userModel.js";
 import cookieParser from "cookie-parser";
 const app = express();
 const port = process.env.PORT
-import cors from 'cors';
 
 connectDB()
 
