@@ -13,11 +13,18 @@ const port = process.env.PORT
 
 connectDB()
 
+app.options("*", cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'PUT', 'POST', 'DELETE'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'], // Include Authorization in allowed headers
+}));
+
 app.use(cors({
     origin: 'http://localhost:5173',
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     credentials: true,
-    headers: ['Content-Type']
+    headers: ['Content-Type', 'Authorization']
   }))
 
 app.use(express.json())
