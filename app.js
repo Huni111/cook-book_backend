@@ -17,12 +17,14 @@ app.options("*", cors({
     origin: 'http://localhost:5173',
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'], // Include Authorization in allowed headers
+    credentials: 'include'
 }));
 
 app.use(cors({
     origin: 'http://localhost:5173',
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    headers: ['Content-Type', 'Authorization']
+    headers: ['Content-Type', 'Authorization'],
+    credentials: 'include'
   }))
 
 app.use(express.json())
