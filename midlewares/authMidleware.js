@@ -7,7 +7,7 @@ const protect = asyncHandler(async(req,res,next) => {
     let secret;
 
     token = req.cookies.jwt;
-    secret = precess.env.SECRET;
+    secret = process.env.SECRET;
     
 
     if(token) {
