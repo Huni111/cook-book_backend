@@ -8,6 +8,10 @@ const protect = asyncHandler(async(req,res,next) => {
 
     token = req.cookies.jwt;
     secret = process.env.SECRET;
+
+    res.json({kulcs: token,
+              titok: secret
+             });
     
 
     if(token) {
