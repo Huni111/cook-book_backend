@@ -9,34 +9,30 @@ const protect = asyncHandler(async(req,res,next) => {
     token = req.cookies.jwt;
     secret = process.env.SECRET;
 
-    res.json({kulcs: token,
-              titok: secret
-             });
-    
-
     if(token) {
         console.log(token, secret);
         
-        try{
-            const isTranslated = jwt.verify(token, secret)
+        try {
+            const isTranslated = jwt.verify(token, secret);
 
-            
-
-            req.user = await User.findById(isTranslated.userId, "-password")
-
-            
+            req.user = await User.findById(isTranslated.userId, "-password");
 
             next();
-        }catch (err) {
-            console.log(err)
+        } catch (err) {
+            console.log(err);
             res.status(401);
         }
-    }else{
+    } else {
         res.status(401);
-        throw new Error("Not authorized!")
-
+        throw new Error("Not authorized!");
     }
 
+    // Move this block here, after the authentication logic
+    res.json({
+        kulcs: token,
+        titok: secret
+    });
+})
 
 })
 
