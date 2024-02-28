@@ -4,12 +4,17 @@ import User from "../models/userModel.js"
 
 const protect = asyncHandler(async(req,res,next) => {
     let token;
+    let secret;
 
     token = req.cookies.jwt;
+    secret = precess.env.SECRET;
+    
 
     if(token) {
+        console.log(token, secret);
+        
         try{
-            const isTranslated = jwt.verify(token, process.env.SECRET)
+            const isTranslated = jwt.verify(token, secret)
 
             
 
