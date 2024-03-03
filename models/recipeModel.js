@@ -23,11 +23,15 @@ const recipeSchema = new mongoose.Schema({
     },
     image_link: {
         type: String,
-        required: true
+        required: false
     },
     preparation_time: {
         type: Number,
         required: true
+    },
+     language: {
+    	type: String,
+    	required: true
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
