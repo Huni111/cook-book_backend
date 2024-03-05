@@ -15,7 +15,7 @@ connectDB()
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://cb-frontend-n0a7vhdfo-hunors-projects.vercel.app',
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
     headers: ['Content-Type'],
     credentials: true
