@@ -8,6 +8,8 @@ routerR.get("/all", control.fetchAllRecipe)
 
 routerR.get('/some/', control.findRecipe)
 
+routerR.get('/:id', control.getRecipeById)
+
 routerR.post('/new', protect,control.uploadRecipe)
 
 routerR.put('/update_one/:id', protect,control.updateRecipe)
