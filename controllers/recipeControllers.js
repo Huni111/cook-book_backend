@@ -18,7 +18,21 @@ const fetchAllRecipe = asyncHandler(async (req, res) => {
         res.status(404);
         throw new Error("Nincs egy recept se!")
     }
-})
+});
+
+//desc: Fetch a specific recipe by ID
+//route: GET api/recipe/:id
+//access: public
+const getRecipeById = asyncHandler(async (req, res) => {
+    const recipe = await Recipe.findById(req.params.id);
+
+    if (recipe) {
+        res.json(recipe);
+    } else {
+        res.status(404);
+        throw new Error("Recipe not found!");
+    }
+});
 
 //desc: Upload new recipe!
 //route: POST api/recipe/new
@@ -170,7 +184,8 @@ export {
     updateRecipe,
     findRecipe,
     deleteRecipe,
-    myRecipes
+    myRecipes,
+   getRecipeById
     
  }
 
