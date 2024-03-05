@@ -10,14 +10,15 @@ const fetchAllRecipe = asyncHandler(async (req, res) => {
 
    const recipes = await Recipe.find({});
 
-    if (recipes && !recipes.length == 0) {
+    if (recipes && recipes.length !== 0) {
 
         res.json(recipes)
-        console.log("Nincs error!")
+        
     } else {
         res.status(404);
-        throw new Error("Nincs egy recept se!")
-    }
+         const error = new Error("Nincs egy recept se!");
+        console.error(error);
+        throw error;    }
 });
 
 //desc: Fetch a specific recipe by ID
