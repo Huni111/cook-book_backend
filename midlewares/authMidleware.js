@@ -27,11 +27,10 @@ const protect = asyncHandler(async(req,res,next) => {
         throw new Error("Not authorized!");
     }
 
-    // Move this block here, after the authentication logic
-    res.json({
-        kulcs: token,
-        titok: secret
-    });
+    // res.json({
+    //     kulcs: token,
+    //     titok: secret
+    // });
 })
 
 
