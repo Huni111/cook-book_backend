@@ -33,7 +33,7 @@ const fetchAllRecipe = asyncHandler(async (req, res) => {
 const uploadRecipe = asyncHandler(async(req,res) => {
    
     console.log("upload works!")
-    const {name, meal_time, category, ingredients, instructions, image_link, preparation_time,} = req.body;
+    const {name, meal_time, category, ingredients, instructions, image_link, preparation_time, language} = req.body;
     const author = req.user._id
     const recipeExist = await Recipe.findOne({ name })
     const user = await User.findById(req.user._id)
