@@ -56,7 +56,8 @@ const uploadRecipe = asyncHandler(async(req,res) => {
         instructions,
         image_link,
         preparation_time,
-        author
+        author,
+        language,
     })
 
 
