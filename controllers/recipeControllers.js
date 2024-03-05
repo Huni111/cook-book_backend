@@ -12,14 +12,7 @@ const fetchAllRecipe = asyncHandler(async (req, res) => {
 
     if (recipes && !recipes.length == 0) {
 
-        const allRecipe = recipes.map((recipe) => ({
-            _id: recipe._id,
-            name: recipe.name,
-            ingredients: recipe.ingredients,
-            instructions: recipe.instructions,
-        }))
-
-        res.json(allRecipe)
+        res.json(recipes)
         console.log("Nincs error!")
     } else {
         res.status(404);
