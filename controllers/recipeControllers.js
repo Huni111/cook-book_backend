@@ -8,10 +8,12 @@ import User from "../models/userModel.js"
 //access: public
 const fetchAllRecipe = asyncHandler(async (req, res) => {
 
+    
+
    const recipes = await Recipe.find({});
 
     if (recipes && recipes.length !== 0) {
-
+        
         res.json(recipes)
         
     } else {
@@ -28,8 +30,11 @@ const getRecipeById = asyncHandler(async (req, res) => {
     const recipe = await Recipe.findById(req.params.id);
 
     if (recipe) {
+
         res.json(recipe);
+
     } else {
+
         res.status(404);
         throw new Error("Recipe not found!");
     }
@@ -40,17 +45,30 @@ const getRecipeById = asyncHandler(async (req, res) => {
 //access: private
 const uploadRecipe = asyncHandler(async(req,res) => {
    
-    console.log("upload works!")
+    
     const {name, meal_time, category, ingredients, instructions, image_link, preparation_time, language} = req.body;
     const author = req.user._id
     const recipeExist = await Recipe.findOne({ name })
     const user = await User.findById(req.user._id)
 
+   console.log(req.body)
     if(recipeExist) {
+
         res.status(404);
         throw new Error("Recipe already exist!")
     }
     if(!user) {
+
+        res.status(404);
+        throw new Error("Login required")
+
+    }if(recipeExist) {
+
+        res.status(404);
+        throw new Error("Recipe already exist!")
+    }
+    if(!user) {
+
         res.status(404);
         throw new Error("Login required")
 
@@ -73,6 +91,7 @@ const uploadRecipe = asyncHandler(async(req,res) => {
     await user.save();
   
     res.status(201).json({
+
         id: recipe._id,
         name: recipe.name,
         user_recipes: user.recipes
@@ -130,8 +149,6 @@ const findRecipe = asyncHandler(async(req,res) => {
 
         res.json(recipe)
     }
-
-
     
 })
 
@@ -149,12 +166,13 @@ const deleteRecipe = asyncHandler(async(req,res) => {
    res.status(201).send("Recipe deleted!")
 })
 
+
 //desc: Retrieve user's recipes
 //route: GET api/recipe/my_recipes
 //access: private
 const myRecipes = asyncHandler(async(req,res) => {
 
-    const loggedInUserId = req.user._id; 
+    const loggedInUserId = req.params.uid;
 
      const user = await User.findById(loggedInUserId).populate({
          path: 'recipes',
@@ -169,14 +187,8 @@ const myRecipes = asyncHandler(async(req,res) => {
      // Access the user's recipes with full details
      const userRecipes = user.recipes;
  
-     const userRecipesArray = userRecipes.map(recipe => ({
-         _id: recipe._id,
-         name: recipe.name,
-         ingredients: recipe.ingredients,
-         instructions: recipe.instructions,
-     }));
  
-     res.json(userRecipesArray);
+     res.json(userRecipes);
 })
 
 export { 

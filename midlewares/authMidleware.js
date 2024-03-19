@@ -10,13 +10,14 @@ const protect = asyncHandler(async(req,res,next) => {
     secret = process.env.SECRET;
 
     if(token) {
-        console.log(token, secret);
+       // console.log(token, secret);
         
         try {
             const isTranslated = jwt.verify(token, secret);
 
             req.user = await User.findById(isTranslated.userId, "-password");
 
+            
             next();
         } catch (err) {
             console.log(err);
