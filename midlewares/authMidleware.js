@@ -8,9 +8,9 @@ const protect = asyncHandler(async(req,res,next) => {
 
     token = req.cookies.jwt;
     secret = process.env.SECRET;
-
+    console.log(token);
     if(token) {
-       // console.log(token, secret);
+        console.log(token);
         
         try {
             const isTranslated = jwt.verify(token, secret);
