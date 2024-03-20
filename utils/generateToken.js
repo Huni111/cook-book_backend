@@ -9,7 +9,7 @@ const token = jwt.sign({ userId }, process.env.SECRET, {
 res.cookie('jwt', token, {
     httpOnly: true,
     secure: false,
-    sameSite: 'none',
+    sameSite: 'None',
     maxAge: 24 * 60 * 60 * 1000
 })
 
