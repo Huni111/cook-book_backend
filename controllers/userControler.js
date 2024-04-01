@@ -9,6 +9,7 @@ const authUser = asyncHandler(async(req,res) => {
 const {email, password} = req.body;
 
 const user = await User.findOne({email});
+const time = new Date();
 
 if(user &&(await user.matchPassword(password))){
     generateToken(res, user._id);
@@ -18,6 +19,7 @@ if(user &&(await user.matchPassword(password))){
         _id: user._id,
         name: user.name,
         email: user.email,
+        time: time
     })
 }else{
     res.status(401);

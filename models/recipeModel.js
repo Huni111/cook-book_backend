@@ -33,6 +33,19 @@ const recipeSchema = new mongoose.Schema({
     	type: String,
     	required: false
     },
+    comments: [
+        {
+            commenter: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            text: String,
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
